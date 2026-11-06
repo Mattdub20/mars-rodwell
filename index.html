@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Rodwell Simulation</title>
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+    <div id="info">
+        <h1>MARS WATER EXTRACTION</h1>
+        <p>USING THE RODWELL METHOD</p>
+        <span>Click the buttons below to explore the simulation.</span>
+    </div>
+
+    <div id="sim" hidden>
+        <div id="caption"><h2></h2><p></p></div>
+        <div id="player">
+            <button id="play" title="Play / pause">❚❚</button>
+            <button id="restart" title="Restart">↺</button>
+            <input id="seek" type="range" min="0" max="1000" value="0">
+            <span id="time">0:00</span>
+        </div>
+    </div>
+
+    <div id="explore" hidden>
+        <div id="views">
+            <button data-view="overview">Overview</button>
+            <button data-view="rig">Drilling rig</button>
+            <button data-view="underground">Underground</button>
+            <button data-view="tank">Tank</button>
+            <button data-view="wide">Landscape</button>
+            <button id="orbit">Auto-orbit: off</button>
+        </div>
+        <p>WASD move · Q / E down / up · Shift = faster · Left-drag rotate · Right-drag pan · Scroll zoom</p>
+    </div>
+
+    <div id="stages">
+        <button data-stage="0">0 · Layers</button>
+        <button data-stage="1">1 · Environment</button>
+        <button data-stage="2">2 · Drilling rig</button>
+        <button data-stage="3">3 · Heaters &amp; pump</button>
+        <button data-stage="4">4 · Pipes &amp; tank</button>
+        <button data-stage="5">5 · Full simulation</button>
+        <button data-stage="6">6 · Explore</button>
+    </div>
+
+    <div id="labels"></div>
+    <div id="toolbar">
+        <div id="toolbar-buttons">
+            <button id="buttons-toggle" title="Show or hide the buttons (H)">Buttons: shown</button>
+            <button id="labels-toggle" title="Show or hide labels (L)">Labels: on</button>
+        </div>
+        <div id="fullprompt" hidden>
+            <strong>Tank full!</strong>
+            <span>The storage tank has reached capacity and the pump has stopped.</span>
+            <button id="resetTank">Reset</button>
+        </div>
+    </div>
+
+    <div id="scene"></div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

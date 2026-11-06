@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: #111318;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+#scene {
+    width: 100vw;
+    height: 100vh;
+}
+
+#info {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#info h1 {
+    font-size: 25px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+}
+
+#info p {
+    font-size: 12px;
+    color: #e5a17c;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+#info span {
+    font-size: 12px;
+    color: #aaa;
+}
+#stages {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+#stages button {
+    font: inherit;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    padding: 9px 14px;
+    color: #f4dccb;
+    background: rgba(30, 18, 14, 0.75);
+    border: 1px solid rgba(244, 220, 203, 0.35);
+    border-radius: 6px;
+    cursor: pointer;
+}
+#stages button.active {
+    background: #d9561c;
+    border-color: #d9561c;
+    color: #fff;
+}
+#stages button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+#sim {
+    position: fixed;
+    left: 50%;
+    bottom: var(--panel-bottom, 72px);
+    transform: translateX(-50%);
+    width: min(640px, 92vw);
+    z-index: 10;
+    color: #f4dccb;
+}
+#sim[hidden] { display: none; }
+#caption {
+    background: rgba(30, 18, 14, 0.78);
+    border: 1px solid rgba(244, 220, 203, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+}
+#caption h2 { margin: 0 0 4px; font-size: 16px; letter-spacing: 0.05em; color: #ff9a5c; }
+#caption p { margin: 0; font-size: 14px; line-height: 1.4; }
+#player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(30, 18, 14, 0.78);
+    border: 1px solid rgba(244, 220, 203, 0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+#player button {
+    font: inherit;
+    color: #f4dccb;
+    background: transparent;
+    border: 1px solid rgba(244, 220, 203, 0.35);
+    border-radius: 6px;
+    width: 36px;
+    height: 30px;
+    cursor: pointer;
+}
+#seek { flex: 1; accent-color: #d9561c; }
+#time { font-size: 13px; min-width: 70px; text-align: right; font-variant-numeric: tabular-nums; }
+
+#labels { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+#labels[hidden] { display: none; }
+.label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 3px 9px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: #fff;
+    background: rgba(20, 12, 10, 0.8);
+    border: 1px solid rgba(255, 154, 92, 0.7);
+    border-radius: 4px;
+    margin-top: -8px;
+}
+.label::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 1px;
+    height: 7px;
+    background: rgba(255, 154, 92, 0.9);
+}
+#labels-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 10;
+    font: inherit;
+    font-size: 13px;
+    color: #f4dccb;
+    background: rgba(30, 18, 14, 0.75);
+    border: 1px solid rgba(244, 220, 203, 0.35);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#explore {
+    position: fixed;
+    left: 50%;
+    bottom: var(--panel-bottom, 72px);
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    color: #f4dccb;
+    width: min(700px, 94vw);
+}
+#explore[hidden] { display: none; }
+#views { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+#views button {
+    font: inherit;
+    font-size: 12px;
+    color: #f4dccb;
+    background: rgba(30, 18, 14, 0.78);
+    border: 1px solid rgba(244, 220, 203, 0.35);
+    border-radius: 6px;
+    padding: 6px 11px;
+    cursor: pointer;
+}
+#views button:hover, #views button.on { background: #d9561c; border-color: #d9561c; color: #fff; }
+#explore p {
+    display: inline-block;
+    margin: 8px 0 0;
+    font-size: 12px;
+    padding: 4px 10px;
+    background: rgba(30, 18, 14, 0.7);
+    border-radius: 6px;
+}
+
+#stages { flex-wrap: wrap; justify-content: center; max-width: 96vw; }
+#stages button { white-space: nowrap; padding: 8px 10px; font-size: 12px; }
+
+#fullprompt {
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    color: #f4dccb;
+    background: rgba(30, 18, 14, 0.92);
+    border: 1px solid #ff9a5c;
+    border-radius: 8px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+}
+#fullprompt[hidden] { display: none; }
+#fullprompt strong { color: #ff9a5c; letter-spacing: 0.05em; }
+#resetTank {
+    font: inherit;
+    font-weight: bold;
+    color: #fff;
+    background: #d9561c;
+    border: 0;
+    border-radius: 6px;
+    padding: 7px 16px;
+    cursor: pointer;
+}
+
+/* top-right toolbar: toggles, with the "tank full" notice underneath */
+#toolbar {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    max-width: min(300px, 92vw);
+}
+#toolbar-buttons { display: flex; gap: 8px; }
+#labels-toggle, #buttons-toggle {
+    position: static;
+    top: auto;
+    right: auto;
+}
+#buttons-toggle {
+    font: inherit;
+    font-size: 13px;
+    color: #f4dccb;
+    background: rgba(30, 18, 14, 0.75);
+    border: 1px solid rgba(244, 220, 203, 0.35);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+#fullprompt {
+    position: static;
+    transform: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    width: 100%;
+}
+#fullprompt span { line-height: 1.35; }
+/* "Buttons: hidden" removes the stage bar, view buttons and player controls */
+body.ui-hidden #stages,
+body.ui-hidden #views,
+body.ui-hidden #player { display: none; }
